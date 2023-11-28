@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src/",
+      "paths": {
+        "@components/*": ["components/*"],
+        "@screens/*": ["screens/*"],
+        "@sagas/*": ["redux/sagas/*"],
+        "@slices/*": ["redux/slices/*"],
+        "@configs/*": ["configs/*"],
+        "@utils/*": ["utils/*"],
+        "@assets/*": ["assets/*"],
+        "@constants/*": ["constants/*"],
+        "@actions/*": ["redux/actions/*"]
+      }
+    }
+  }
+  

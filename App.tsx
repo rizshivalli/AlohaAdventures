@@ -25,6 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Aloha from './src/assets/icons/Aloha';
+import Icons from './src/components/Icons';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -69,7 +70,9 @@ function App(): JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-        <Aloha />
+
+      <Icons name="Aloha" width={100} height={100} />
+
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
@@ -94,7 +97,6 @@ function App(): JSX.Element {
           <LearnMoreLinks />
         </View>
       </ScrollView>
-     
     </SafeAreaView>
   );
 }
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
-    fontFamily:'IBMPlexMono-Bold'
+    fontFamily: 'IBMPlexMono-Bold',
   },
   sectionDescription: {
     marginTop: 8,
