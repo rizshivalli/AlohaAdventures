@@ -1,12 +1,23 @@
+import Header from '@components/header';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 const HomeScreen = () => {
   return (
     <View>
-      <Text>Home Screen</Text>
+      <Header />
+      {/* <Text style={styles.text}>Home Screen</Text> */}
     </View>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 20,
+    fontWeight: '400',
+    fontFamily: fontOptions('400'),
+    color: theme.dark,
+  },
+});

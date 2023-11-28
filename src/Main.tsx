@@ -1,3 +1,4 @@
+import './constants/globalConstants';
 import React from 'react';
 import Navigation from './configs/navigation';
 import {NavigationContainer} from '@react-navigation/native';
