@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.9)',
     fontSize: 56,
     fontFamily: fontOptions('700'),
-    // fontWeight: '700',
+    // fontWeight: '600',
     fontStyle: 'normal',
     lineHeight: 56,
   },
