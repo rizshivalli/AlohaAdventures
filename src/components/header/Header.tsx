@@ -12,8 +12,8 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flex: 1,
     alignItems: 'center',
+    backgroundColor: theme.white,
     padding: 24,
   },
 });

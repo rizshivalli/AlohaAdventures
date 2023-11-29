@@ -32,8 +32,10 @@ global.fontOptions = (fontWeight: string): string => {
 
 // Initialize the theme
 global.theme = {
-  bg: '#FFF',
-  dark: '#001A1A',
+  green: '#008080',
+  dark: '#001a1a',
+  light: '#e6f2f2',
+  white: '#ffffff',
 };
 
 // Initialize fontWeights

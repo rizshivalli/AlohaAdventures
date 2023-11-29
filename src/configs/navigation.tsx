@@ -4,18 +4,22 @@ import HomeScreen from '@screens/HomeScreen/HomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import CustomBottomTabBar from '@components/CustomBottomTabBar';
 import {RootStackParamList} from 'types/RootStackParams';
+import Header from '@components/header';
 
 const Tab = createBottomTabNavigator();
 
 const MainStack = createStackNavigator<RootStackParamList>();
 
+const MainHeader = () => {
+  return <Header />;
+};
 function BottomTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarHideOnKeyboard: true,
         tabBarStyle: [{display: 'flex'}, null],
+        header: MainHeader,
       }}
       initialRouteName={'Home'}
       tabBar={CustomBottomTabBar}>
