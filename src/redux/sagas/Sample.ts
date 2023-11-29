@@ -6,7 +6,7 @@ import {
   spawn,
   takeLatest,
 } from 'redux-saga/effects';
-import {FAIL, REQUEST, SAMPLE_POSTS, SUCCESS} from 'redux/actions';
+import {FAIL, REQUEST, SAMPLE_POSTS, SUCCESS} from '../actions';
 
 export function* GetSamplePosts({
   payload,

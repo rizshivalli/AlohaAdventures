@@ -1,8 +1,17 @@
 import Aloha from '@assets/icons/Aloha';
+import BottomHome from '@assets/icons/BottomHome';
+import BottomHomeSelected from '@assets/icons/BottomHomeSelected';
+import BottomSurfing from '@assets/icons/BottomSurfing';
+import BottomSurfingSelected from '@assets/icons/BottomSurfingSelected';
+
 import {createElement} from 'react';
 
 export const iconsKey = {
   Aloha: Aloha,
+  BottomHome: BottomHome,
+  BottomHomeSelected: BottomHomeSelected,
+  BottomSurfing: BottomSurfing,
+  BottomSurfingSelected: BottomSurfingSelected,
 };
 
 export interface IconsProps {

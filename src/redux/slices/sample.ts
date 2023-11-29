@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {SAMPLE_POSTS, SUCCESS} from 'redux/actions';
+import {SAMPLE_POSTS, SUCCESS} from '../actions';
 
 export interface SampleStateType {
   posts?: Array<any>;

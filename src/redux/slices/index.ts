@@ -1,9 +1,9 @@
 import {combineReducers} from '@reduxjs/toolkit';
 
-import errorReducer, {initialErrorState} from '@slices/error';
-import loadingReducer, {initialLoadingState} from '@slices/loading';
+import errorReducer, {initialErrorState} from '../slices/error';
+import loadingReducer, {initialLoadingState} from '../slices/loading';
 
-import {LOG_OUT} from 'redux/actions';
+import {LOG_OUT} from '../actions';
 
 const appReducer = combineReducers({
   loading: loadingReducer,
