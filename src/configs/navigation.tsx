@@ -5,6 +5,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import CustomBottomTabBar from '@components/CustomBottomTabBar';
 import {RootStackParamList} from 'types/RootStackParams';
 import Header from '@components/header';
+import Icons from '@components/Icons';
+import SurfingHome from '@screens/SurfingHome/SurfingHome';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,14 +30,42 @@ function BottomTabs() {
         options={{
           tabBarHideOnKeyboard: true,
           tabBarLabel: 'Home',
+          tabBarIcon: ({focused}) => (
+            <Icons name={focused ? 'BottomHome' : 'BottomHomeSelected'} />
+          ),
         }}
         component={HomeScreen}
       />
       <Tab.Screen
-        name="Records"
+        name="Surfing"
         options={{
-          tabBarLabel: 'Records',
+          tabBarLabel: 'Surfing',
           unmountOnBlur: true,
+          tabBarIcon: ({focused}) => (
+            <Icons name={focused ? 'BottomSurfing' : 'BottomSurfingSelected'} />
+          ),
+        }}
+        component={SurfingHome}
+      />
+      <Tab.Screen
+        name="Hula"
+        options={{
+          tabBarLabel: 'Hula',
+          unmountOnBlur: true,
+          tabBarIcon: ({focused}) => (
+            <Icons name={focused ? 'BottomSurfing' : 'BottomSurfingSelected'} />
+          ),
+        }}
+        component={HomeScreen}
+      />
+      <Tab.Screen
+        name="Vulcano"
+        options={{
+          tabBarLabel: 'Vulcano',
+          unmountOnBlur: true,
+          tabBarIcon: ({focused}) => (
+            <Icons name={focused ? 'BottomSurfing' : 'BottomSurfingSelected'} />
+          ),
         }}
         component={HomeScreen}
       />

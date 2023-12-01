@@ -53,13 +53,13 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>IBMPlexMono-Bold.ttf</string>
 		<string>IBMPlexMono-ExtraLight.ttf</string>
 		<string>IBMPlexMono-Light.ttf</string>
 		<string>IBMPlexMono-Medium.ttf</string>
 		<string>IBMPlexMono-Regular.ttf</string>
 		<string>IBMPlexMono-SemiBold.ttf</string>
 		<string>IBMPlexMono-Thin.ttf</string>
+		<string>IBMPlexMono-Bold.ttf</string>
 	</array>
 </dict>
 </plist>

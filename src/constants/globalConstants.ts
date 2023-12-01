@@ -17,9 +17,9 @@ global.fontOptions = (fontWeight: string): string => {
     case 'medium':
     case '600':
     case 'semibold':
-      return 'IBMPlexMono-SemiBold';
     case '700':
     case 'bold':
+      return 'IBMPlexMono-Bold';
     case '800':
     case 'extrabold':
       return 'IBMPlexMono-Bold';

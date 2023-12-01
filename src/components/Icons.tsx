@@ -3,6 +3,7 @@ import BottomHome from '@assets/icons/BottomHome';
 import BottomHomeSelected from '@assets/icons/BottomHomeSelected';
 import BottomSurfing from '@assets/icons/BottomSurfing';
 import BottomSurfingSelected from '@assets/icons/BottomSurfingSelected';
+import RightArrow from '@assets/icons/RightArrow';
 
 import {createElement} from 'react';
 
@@ -12,6 +13,9 @@ export const iconsKey = {
   BottomHomeSelected: BottomHomeSelected,
   BottomSurfing: BottomSurfing,
   BottomSurfingSelected: BottomSurfingSelected,
+
+  // icons
+  RightArrow: RightArrow,
 };
 
 export interface IconsProps {

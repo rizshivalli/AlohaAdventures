@@ -1,15 +1,23 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
+import Text from './text';
 function MyTabBar({state, descriptors, navigation}) {
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={styles.containerStyle}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
+        const {
+          tabBarLabel,
+          title,
+          tabBarAccessibilityLabel,
+          tabBarTestID,
+          tabBarIcon,
+        } = options;
         const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
+          tabBarLabel !== undefined
+            ? tabBarLabel
+            : title !== undefined
+            ? title
             : route.name;
 
         const isFocused = state.index === index;
@@ -35,14 +43,20 @@ function MyTabBar({state, descriptors, navigation}) {
 
         return (
           <TouchableOpacity
+            style={styles.touchable}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
+            accessibilityLabel={tabBarAccessibilityLabel}
+            testID={tabBarTestID}
             onPress={onPress}
-            onLongPress={onLongPress}
-            style={{flex: 1}}>
-            <Text style={{color: isFocused ? '#673ab7' : '#222'}}>{label}</Text>
+            onLongPress={onLongPress}>
+            <View style={styles.navigationItemStyle}>
+              <options.tabBarIcon />
+              <Text style={isFocused ? styles.text : styles.textSelected}>
+                {label}
+              </Text>
+            </View>
+            {isFocused && <View style={styles.selectedBar} />}
           </TouchableOpacity>
         );
       })}
@@ -51,3 +65,52 @@ function MyTabBar({state, descriptors, navigation}) {
 }
 
 export default MyTabBar;
+
+const styles = StyleSheet.create({
+  containerStyle: {
+    flexDirection: 'row',
+    backgroundColor: theme.white,
+    justifyContent: 'space-around',
+    height: 72,
+    shadowColor: theme.green,
+    shadowOffset: {width: 2, height: 4},
+    shadowOpacity: 0.2,
+    elevation: 5,
+    width: '100%',
+  },
+  navigationItemStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+  },
+  text: {
+    color: theme.dark,
+    textAlign: 'center',
+    fontOptions: fontOptions('600'),
+    fontWeight: '600',
+    fontStyle: 'normal',
+    fontSize: 10,
+    lineHeight: 16,
+  },
+  textSelected: {
+    color: theme.green,
+    textAlign: 'center',
+    fontOptions: fontOptions('600'),
+    fontWeight: '600',
+    fontStyle: 'normal',
+    fontSize: 10,
+    lineHeight: 16,
+  },
+  selectedBar: {
+    bottom: 0,
+    position: 'absolute',
+    height: 5,
+    backgroundColor: theme.green,
+    width: '100%',
+  },
+  touchable: {
+    flex: 1,
+  },
+});
