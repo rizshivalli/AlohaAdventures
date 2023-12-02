@@ -11,7 +11,6 @@ import {
 import {AppStackNavigationProp} from 'types/RootStackParams';
 import {PropsFromRedux} from '.';
 import FullScreenLoader from '@components/fullScreenLoader';
-import Icons from '@components/Icons';
 
 const CustomHeader = ({title, onPressBack}) => {
   return (
@@ -44,6 +43,7 @@ const ActivitiesScreen: FC<ActivitiesScreenProps> = ({
   route,
   getActivitiesByName,
 }) => {
+  // @ts-ignore
   const {activityName} = route?.params;
 
   const [data, setData] = React.useState<SurfingData>();
