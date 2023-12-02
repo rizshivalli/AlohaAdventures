@@ -9,6 +9,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 export type BottomTabParamList = {
   Home?: {from?: string; action?: string};
   Surfing?: {from?: string};
+  ComingSoon?: {from?: string};
 };
 
 export type RootStackParamList = {

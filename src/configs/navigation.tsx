@@ -5,12 +5,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import CustomBottomTabBar from '@components/CustomBottomTabBar';
 import {RootStackParamList} from 'types/RootStackParams';
 import Header from '@components/header';
-import Icons from '@components/Icons';
 import SurfingHome from '@screens/SurfingHome/SurfingHome';
 import HomeScreen from '@screens/HomeScreen';
 import ActivitiesScreen from '@screens/ActivitiesScreen';
-import Text from '@components/text';
-import {View} from 'react-native';
+import ComingSoonScreen from '@screens/ComingSoon';
 
 const Tab = createBottomTabNavigator();
 
@@ -51,7 +49,7 @@ function BottomTabs() {
           tabBarLabel: 'Hula',
           unmountOnBlur: true,
         }}
-        component={HomeScreen}
+        component={ComingSoonScreen}
       />
       <Tab.Screen
         name="Vulcano"
@@ -59,7 +57,7 @@ function BottomTabs() {
           tabBarLabel: 'Vulcano',
           unmountOnBlur: true,
         }}
-        component={HomeScreen}
+        component={ComingSoonScreen}
       />
     </Tab.Navigator>
   );
