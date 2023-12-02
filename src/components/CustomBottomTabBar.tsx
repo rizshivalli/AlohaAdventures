@@ -1,18 +1,14 @@
 import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import Text from './text';
+import Icons from './Icons';
 function MyTabBar({state, descriptors, navigation}) {
   return (
     <View style={styles.containerStyle}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
-        const {
-          tabBarLabel,
-          title,
-          tabBarAccessibilityLabel,
-          tabBarTestID,
-          tabBarIcon,
-        } = options;
+        const {tabBarLabel, title, tabBarAccessibilityLabel, tabBarTestID} =
+          options;
         const label =
           tabBarLabel !== undefined
             ? tabBarLabel
@@ -21,6 +17,7 @@ function MyTabBar({state, descriptors, navigation}) {
             : route.name;
 
         const isFocused = state.index === index;
+        // get focused label
 
         const onPress = () => {
           const event = navigation.emit({
@@ -41,6 +38,19 @@ function MyTabBar({state, descriptors, navigation}) {
           });
         };
 
+        const getTabBarIcon = (focused, name) => {
+          const iconMapping = {
+            Home: 'BottomHome',
+            Surfing: 'BottomSurfing',
+            Hula: 'BottomHula',
+            Vulcano: 'BottomVulcano',
+          };
+
+          const iconName = iconMapping[name] || 'BottomSurfing';
+
+          return <Icons name={focused ? `${iconName}Selected` : iconName} />;
+        };
+
         return (
           <TouchableOpacity
             style={styles.touchable}
@@ -51,8 +61,8 @@ function MyTabBar({state, descriptors, navigation}) {
             onPress={onPress}
             onLongPress={onLongPress}>
             <View style={styles.navigationItemStyle}>
-              <options.tabBarIcon />
-              <Text style={isFocused ? styles.text : styles.textSelected}>
+              {getTabBarIcon(isFocused, label)}
+              <Text style={isFocused ? styles.textSelected : styles.text}>
                 {label}
               </Text>
             </View>

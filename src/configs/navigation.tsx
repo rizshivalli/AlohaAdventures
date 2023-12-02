@@ -9,6 +9,8 @@ import Icons from '@components/Icons';
 import SurfingHome from '@screens/SurfingHome/SurfingHome';
 import HomeScreen from '@screens/HomeScreen';
 import ActivitiesScreen from '@screens/ActivitiesScreen';
+import Text from '@components/text';
+import {View} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,19 +24,16 @@ function BottomTabs() {
     <Tab.Navigator
       screenOptions={{
         tabBarHideOnKeyboard: true,
-        tabBarStyle: [{display: 'flex'}, null],
+        tabBarStyle: [{display: 'flex', height: 72}, null],
         header: MainHeader,
       }}
-      initialRouteName={'Home'}
-      tabBar={CustomBottomTabBar}>
+      tabBar={CustomBottomTabBar}
+      initialRouteName={'Home'}>
       <Tab.Screen
         name="Home"
         options={{
           tabBarHideOnKeyboard: true,
           tabBarLabel: 'Home',
-          tabBarIcon: ({focused}) => (
-            <Icons name={focused ? 'BottomHome' : 'BottomHomeSelected'} />
-          ),
         }}
         component={HomeScreen}
       />
@@ -43,9 +42,6 @@ function BottomTabs() {
         options={{
           tabBarLabel: 'Surfing',
           unmountOnBlur: true,
-          tabBarIcon: ({focused}) => (
-            <Icons name={focused ? 'BottomSurfing' : 'BottomSurfingSelected'} />
-          ),
         }}
         component={SurfingHome}
       />
@@ -54,9 +50,6 @@ function BottomTabs() {
         options={{
           tabBarLabel: 'Hula',
           unmountOnBlur: true,
-          tabBarIcon: ({focused}) => (
-            <Icons name={focused ? 'BottomSurfing' : 'BottomSurfingSelected'} />
-          ),
         }}
         component={HomeScreen}
       />
@@ -65,9 +58,6 @@ function BottomTabs() {
         options={{
           tabBarLabel: 'Vulcano',
           unmountOnBlur: true,
-          tabBarIcon: ({focused}) => (
-            <Icons name={focused ? 'BottomSurfing' : 'BottomSurfingSelected'} />
-          ),
         }}
         component={HomeScreen}
       />

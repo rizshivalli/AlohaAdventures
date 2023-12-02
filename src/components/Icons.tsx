@@ -3,6 +3,12 @@ import BottomHome from '@assets/icons/BottomHome';
 import BottomHomeSelected from '@assets/icons/BottomHomeSelected';
 import BottomSurfing from '@assets/icons/BottomSurfing';
 import BottomSurfingSelected from '@assets/icons/BottomSurfingSelected';
+import BottomHula from '@assets/icons/BottomHula';
+import BottomHulaSelected from '@assets/icons/BottomHulaSelected';
+import BottomVolcano from '@assets/icons/BottomVolcano';
+import BottomVolcanoSelected from '@assets/icons/BottomVolcanoSelected';
+
+// icons
 import RightArrow from '@assets/icons/RightArrow';
 
 import {createElement} from 'react';
@@ -13,6 +19,10 @@ export const iconsKey = {
   BottomHomeSelected: BottomHomeSelected,
   BottomSurfing: BottomSurfing,
   BottomSurfingSelected: BottomSurfingSelected,
+  BottomHula: BottomHula,
+  BottomHulaSelected: BottomHulaSelected,
+  BottomVulcano: BottomVolcano,
+  BottomVulcanoSelected: BottomVolcanoSelected,
 
   // icons
   RightArrow: RightArrow,
