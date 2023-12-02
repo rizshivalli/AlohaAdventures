@@ -75,7 +75,11 @@ const ActivitiesScreen: FC<ActivitiesScreenProps> = ({
       <CustomHeader title="Surfing Details" onPressBack={handleBackPress} />
 
       {data?.image && (
-        <Image source={{uri: data?.image}} style={styles.image} />
+        <Image
+          loadingIndicatorSource={require('../../assets/images/Loading.png')}
+          source={{uri: data?.image}}
+          style={styles.image}
+        />
       )}
 
       <View style={styles.contentContainer}>
