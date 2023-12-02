@@ -3,17 +3,14 @@ import Button from '@components/button';
 import SafeView from '@components/safeView';
 import Text from '@components/text';
 import TravelGuide from '@components/travelGuide';
-import React, {FC, useCallback, useState} from 'react';
+import React, {FC, useCallback} from 'react';
 import {
   ActivityIndicator,
   FlatList,
-  Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
   View,
-  useWindowDimensions,
 } from 'react-native';
 import {AppBottomTabNavigationProp} from 'types/RootStackParams';
 import {PropsFromRedux} from '.';
@@ -33,11 +30,6 @@ const HomeScreen: FC<HomeScreenProps> = ({
   requestCategories,
   navigation,
 }) => {
-  const {height, width} = useWindowDimensions();
-  const [highlightsData, setHighlightsData] = useState<
-    PropsFromRedux['highlights']
-  >([]);
-
   useFocusEffect(
     useCallback(() => {
       requestHighlights({
@@ -94,19 +86,23 @@ const HomeScreen: FC<HomeScreenProps> = ({
             <Text style={styles.highlightsText}>Catagories</Text>
           </View>
 
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            data={catagories}
-            keyExtractor={item => item.name}
-            ItemSeparatorComponent={() => <View style={{paddingBottom: 8}} />}
-            renderItem={({item}) => (
-              <View style={styles.catagoriesItemContainer}>
-                <Text style={styles.catagoriesItemText}>{item.name}</Text>
-                <Icons name="RightArrow" />
-              </View>
-            )}
-          />
+          {Boolean(!catagories?.length) && catagoriesLoading ? (
+            <ActivityIndicator size="large" />
+          ) : (
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              pagingEnabled
+              data={catagories}
+              keyExtractor={item => item.name}
+              ItemSeparatorComponent={() => <View style={{paddingBottom: 8}} />}
+              renderItem={({item}) => (
+                <View style={styles.catagoriesItemContainer}>
+                  <Text style={styles.catagoriesItemText}>{item.name}</Text>
+                  <Icons name="RightArrow" />
+                </View>
+              )}
+            />
+          )}
         </View>
 
         <TravelGuide
