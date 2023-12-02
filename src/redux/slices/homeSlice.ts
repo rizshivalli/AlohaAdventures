@@ -4,9 +4,9 @@ import {GET_ALL_CATEGORIES, GET_ALL_HIGHLIGHTS, SUCCESS} from '../actions';
 
 interface Adventure {
   name: string;
-  activities: {
+  activities: Array<{
     title: string;
-  };
+  }>;
 }
 
 interface Highlights {

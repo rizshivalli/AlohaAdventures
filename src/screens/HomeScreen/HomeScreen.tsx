@@ -3,13 +3,14 @@ import Button from '@components/button';
 import SafeView from '@components/safeView';
 import Text from '@components/text';
 import TravelGuide from '@components/travelGuide';
-import React, {FC, useCallback} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
   ImageBackground,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {AppBottomTabNavigationProp} from 'types/RootStackParams';
@@ -43,6 +44,41 @@ const HomeScreen: FC<HomeScreenProps> = ({
     }, []),
   );
   // useFocusEffect(React.useCallback(BackExitAndroid, []));
+
+  const [expandedItems, setExpandedItems] = useState({});
+
+  const toggleItemExpansion = itemName => {
+    setExpandedItems(prevExpandedItems => ({
+      ...prevExpandedItems,
+      [itemName]: !prevExpandedItems[itemName],
+    }));
+  };
+
+  const renderItem = ({item}) => {
+    const isExpanded = expandedItems[item.name];
+    return (
+      <>
+        <TouchableOpacity onPress={() => toggleItemExpansion(item.name)}>
+          <View style={styles.catagoriesItemContainer}>
+            <Text style={styles.catagoriesItemText}>{item.name}</Text>
+
+            <Icons name="RightArrow" />
+          </View>
+        </TouchableOpacity>
+        {isExpanded && (
+          <View style={styles.activitiesContainer}>
+            {item?.activities?.map((activity, index) => (
+              <View style={styles.activityCard}>
+                <Text key={index} style={styles.activityText}>
+                  {activity.title}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
+      </>
+    );
+  };
 
   return (
     <SafeView style={styles.container}>
@@ -91,17 +127,10 @@ const HomeScreen: FC<HomeScreenProps> = ({
             <ActivityIndicator size="large" />
           ) : (
             <FlatList
-              showsHorizontalScrollIndicator={false}
-              pagingEnabled
               data={catagories}
               keyExtractor={item => item.name}
               ItemSeparatorComponent={() => <View style={{paddingBottom: 8}} />}
-              renderItem={({item}) => (
-                <View style={styles.catagoriesItemContainer}>
-                  <Text style={styles.catagoriesItemText}>{item.name}</Text>
-                  <Icons name="RightArrow" />
-                </View>
-              )}
+              renderItem={renderItem}
             />
           )}
         </View>
@@ -182,6 +211,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 24,
     backgroundColor: theme.white,
+    borderRadius: 8,
   },
   catagoriesItemText: {
     color: theme.dark,
@@ -197,5 +227,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     padding: 16,
+  },
+  activitiesContainer: {
+    margin: 16,
+    gap: 8,
+  },
+  activityText: {
+    fontSize: 16,
+    padding: 8,
+  },
+  activityCard: {
+    borderWidth: 1,
+    borderColor: theme.green,
+    backgroundColor: theme.white,
+    borderRadius: 8,
   },
 });
