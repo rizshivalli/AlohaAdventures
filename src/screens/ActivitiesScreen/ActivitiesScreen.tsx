@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import {
   View,
   Image,
@@ -8,46 +8,10 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-
-const sampledata = {
-  name: 'Surfing',
-  description:
-    'Hawaii is known for its world-famous surf spots and waves that attract surfers from all over the globe. Here are some of the best islands for surfing in Hawaii:',
-  image:
-    'https://storage.googleapis.com/topics-images/web-dev-images/surfing.jpg',
-  activities: [
-    {
-      name: 'North Shore, Oahu',
-    },
-    {
-      name: 'Waimea Bay, Oahu',
-    },
-    {
-      name: 'Sunset Beach, Oahu',
-    },
-    {
-      name: 'Pipeline, Oahu',
-    },
-    {
-      name: 'Maui',
-    },
-    {
-      name: 'Honolii Beach Park, Big Island',
-    },
-    {
-      name: "Pe'ahi (Jaws), Big Island",
-    },
-    {
-      name: 'Hanalei Bay, Kauai',
-    },
-    {
-      name: 'Polihale State Park, Kauai',
-    },
-    {
-      name: 'Kaunakakai Town, Molokai',
-    },
-  ],
-};
+import {AppStackNavigationProp} from 'types/RootStackParams';
+import {PropsFromRedux} from '.';
+import FullScreenLoader from '@components/fullScreenLoader';
+import Icons from '@components/Icons';
 
 const CustomHeader = ({title, onPressBack}) => {
   return (
@@ -60,24 +24,67 @@ const CustomHeader = ({title, onPressBack}) => {
     </View>
   );
 };
-const ActivitiesScreen = ({data = sampledata, navigation}) => {
+
+interface ActivitiesScreenProps
+  extends AppStackNavigationProp<'ActivitiesScreen'>,
+    PropsFromRedux {}
+
+interface SurfingData {
+  name: string;
+  description: string;
+  image: string;
+  activities: Array<{
+    name: string;
+  }>;
+}
+
+const ActivitiesScreen: FC<ActivitiesScreenProps> = ({
+  activityLoading,
+  navigation,
+  route,
+  getActivitiesByName,
+}) => {
+  const {activityName} = route?.params;
+
+  const [data, setData] = React.useState<SurfingData>();
+
   const handleBackPress = () => {
-    navigation.goBack(); // Use navigation to go back
+    navigation?.goBack(); // Use navigation to go back
   };
 
+  const getData = useCallback(() => {
+    getActivitiesByName({
+      payload: {
+        activityName,
+      },
+      callback: dataFromApi => {
+        setData(dataFromApi);
+      },
+    });
+  }, [activityName, getActivitiesByName]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  if (activityLoading) {
+    return <FullScreenLoader message="Loading you adventures" />;
+  }
   return (
     <ScrollView style={styles.container}>
       <CustomHeader title="Surfing Details" onPressBack={handleBackPress} />
 
-      <Image source={{uri: data.image}} style={styles.image} />
+      {data?.image && (
+        <Image source={{uri: data?.image}} style={styles.image} />
+      )}
 
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>{data.name}</Text>
-        <Text style={styles.description}>{data.description}</Text>
+        <Text style={styles.title}>{data?.name}</Text>
+        <Text style={styles.description}>{data?.description}</Text>
 
         <Text style={styles.activitiesTitle}>Best Surfing Spots:</Text>
         <FlatList
-          data={data.activities}
+          data={data?.activities}
           keyExtractor={item => item.name}
           renderItem={({item}) => (
             <View style={styles.activityItemContainer}>

@@ -10,7 +10,7 @@ interface Adventure {
 }
 
 interface Highlights {
-  title: string;
+  title: 'Surfing' | 'Traditional Festivals' | 'Volcanoes';
   description: string;
   image: string;
 }

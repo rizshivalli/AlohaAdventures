@@ -73,7 +73,9 @@ const HomeScreen: FC<HomeScreenProps> = ({
               renderItem={({item}) => (
                 <Highlights
                   onPress={() => {
-                    navigation?.navigate('ActivitiesScreen', {data: item});
+                    navigation?.navigate('ActivitiesScreen', {
+                      activityName: item.title,
+                    });
                   }}
                   item={item}
                 />

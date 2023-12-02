@@ -8,13 +8,15 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 export type BottomTabParamList = {
   Home?: {from?: string; action?: string};
-  Records?: {from?: string};
+  Surfing?: {from?: string};
 };
 
 export type RootStackParamList = {
   BottomNavigator?: NavigatorScreenParams<BottomTabParamList>;
   Home?: {};
-  ActivitiesScreen?: {};
+  ActivitiesScreen?: {
+    activityName: 'Surfing' | 'Traditional Festivals' | 'Volcanoes';
+  };
 };
 // All Bottom Tab Navigations
 export interface AppBottomTabNavigationProp<
