@@ -66,7 +66,6 @@ const HomeScreen: FC<HomeScreenProps> = ({
           ) : (
             <FlatList
               showsHorizontalScrollIndicator={false}
-              pagingEnabled
               horizontal
               data={highlights}
               keyExtractor={item => item.title}
