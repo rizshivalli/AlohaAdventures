@@ -14,6 +14,7 @@ export type BottomTabParamList = {
 export type RootStackParamList = {
   BottomNavigator?: NavigatorScreenParams<BottomTabParamList>;
   Home?: {};
+  ActivitiesScreen?: {};
 };
 // All Bottom Tab Navigations
 export interface AppBottomTabNavigationProp<

@@ -3,32 +3,55 @@ import Button from '@components/button';
 import SafeView from '@components/safeView';
 import Text from '@components/text';
 import TravelGuide from '@components/travelGuide';
-import React from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
+  TouchableOpacity,
   View,
+  useWindowDimensions,
 } from 'react-native';
+import {AppBottomTabNavigationProp} from 'types/RootStackParams';
+import {PropsFromRedux} from '.';
+import {useFocusEffect} from '@react-navigation/native';
+import Highlights from '@components/highlights';
 
-const highlightsData = [
-  {
-    title: 'Surfing',
-    description: 'Best Hawaiian islands for surfing.',
-    image:
-      'https://storage.googleapis.com/topics-images/web-dev-images/surfing_low.png',
-  },
-  {
-    title: 'Drowning',
-    description: 'Best Hawaiian islands for surfing.',
-    image:
-      'https://storage.googleapis.com/topics-images/web-dev-images/surfing_low.png',
-  },
-];
+interface HomeScreenProps
+  extends AppBottomTabNavigationProp<'Home'>,
+    PropsFromRedux {}
 
-const HomeScreen = () => {
+const HomeScreen: FC<HomeScreenProps> = ({
+  requestHighlights,
+  highlights,
+  highlightsLoading,
+  catagories,
+  catagoriesLoading,
+  requestCategories,
+  navigation,
+}) => {
+  const {height, width} = useWindowDimensions();
+  const [highlightsData, setHighlightsData] = useState<
+    PropsFromRedux['highlights']
+  >([]);
+
+  useFocusEffect(
+    useCallback(() => {
+      requestHighlights({
+        payload: {},
+      });
+      requestCategories({
+        payload: {},
+      });
+      return () => {};
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []),
+  );
+  // useFocusEffect(React.useCallback(BackExitAndroid, []));
+
   return (
     <SafeView style={styles.container}>
       <ScrollView>
@@ -46,39 +69,25 @@ const HomeScreen = () => {
             <Text style={styles.highlightsText}>Highlights</Text>
           </View>
 
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            horizontal
-            data={highlightsData}
-            keyExtractor={item => item.title}
-            renderItem={({item}) => (
-              <View>
-                <Image
-                  style={{width: 360, height: 170}}
-                  source={{
-                    uri: item.image,
+          {Boolean(!highlights?.length) && highlightsLoading ? (
+            <ActivityIndicator size="large" />
+          ) : (
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              pagingEnabled
+              horizontal
+              data={highlights}
+              keyExtractor={item => item.title}
+              renderItem={({item}) => (
+                <Highlights
+                  onPress={() => {
+                    navigation?.navigate('ActivitiesScreen', {data: item});
                   }}
+                  item={item}
                 />
-                <View style={{padding: 24}}>
-                  <Text style={styles.highlightsCardHeading}>{item.title}</Text>
-                  <Text style={styles.highlightsCardDescription}>
-                    {item.description}
-                  </Text>
-                  <View style={{alignItems: 'flex-end', paddingTop: 8}}>
-                    <View
-                      style={{
-                        borderRadius: 50,
-                        backgroundColor: theme.light,
-                        padding: 16,
-                      }}>
-                      <Icons name="RightArrow" />
-                    </View>
-                  </View>
-                </View>
-              </View>
-            )}
-          />
+              )}
+            />
+          )}
         </View>
         <View style={styles.catagoriesContainer}>
           <View style={styles.highlightTextContainer}>
@@ -88,12 +97,12 @@ const HomeScreen = () => {
           <FlatList
             showsHorizontalScrollIndicator={false}
             pagingEnabled
-            data={highlightsData}
-            keyExtractor={item => item.title}
+            data={catagories}
+            keyExtractor={item => item.name}
             ItemSeparatorComponent={() => <View style={{paddingBottom: 8}} />}
             renderItem={({item}) => (
               <View style={styles.catagoriesItemContainer}>
-                <Text style={styles.catagoriesItemText}>Adventure</Text>
+                <Text style={styles.catagoriesItemText}>{item.name}</Text>
                 <Icons name="RightArrow" />
               </View>
             )}
@@ -157,20 +166,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     lineHeight: 20,
   },
-  highlightsCardHeading: {
-    color: theme.green,
-    fontSize: 24,
-    fontFamily: fontOptions('700'),
-    fontWeight: '600',
-    fontStyle: 'normal',
-  },
-  highlightsCardDescription: {
-    color: theme.dark,
-    fontSize: 16,
-    fontFamily: fontOptions('400'),
-    fontWeight: '400',
-    fontStyle: 'normal',
-  },
+
   highlightTextContainer: {
     paddingTop: 40,
     paddingBottom: 24,

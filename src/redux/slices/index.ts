@@ -2,17 +2,20 @@ import {combineReducers} from '@reduxjs/toolkit';
 
 import errorReducer, {initialErrorState} from '../slices/error';
 import loadingReducer, {initialLoadingState} from '../slices/loading';
+import homeReducer, {initialHomeState} from '../slices/homeSlice';
 
 import {LOG_OUT} from '../actions';
 
 const appReducer = combineReducers({
   loading: loadingReducer,
   error: errorReducer,
+  home: homeReducer,
 });
 
 export const GlobalInitialState = {
   loading: initialLoadingState || {},
   error: initialErrorState || {},
+  home: initialHomeState || {},
 };
 
 const rootReducer: typeof appReducer = (state, action) => {

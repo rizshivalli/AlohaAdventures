@@ -1,12 +1,14 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '@screens/HomeScreen/HomeScreen';
+
 import {createStackNavigator} from '@react-navigation/stack';
 import CustomBottomTabBar from '@components/CustomBottomTabBar';
 import {RootStackParamList} from 'types/RootStackParams';
 import Header from '@components/header';
 import Icons from '@components/Icons';
 import SurfingHome from '@screens/SurfingHome/SurfingHome';
+import HomeScreen from '@screens/HomeScreen';
+import ActivitiesScreen from '@screens/ActivitiesScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -79,6 +81,14 @@ const Navigation = () => {
       <MainStack.Screen
         name="BottomNavigator"
         component={BottomTabs}
+        options={{
+          headerShown: false, // Hide the header for this screen
+          animationTypeForReplace: 'push', // Specify the animation type when replacing this screen
+        }}
+      />
+      <MainStack.Screen
+        name="ActivitiesScreen"
+        component={ActivitiesScreen}
         options={{
           headerShown: false, // Hide the header for this screen
           animationTypeForReplace: 'push', // Specify the animation type when replacing this screen
